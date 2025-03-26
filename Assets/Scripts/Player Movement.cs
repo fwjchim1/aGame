@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
         //rb.linearVelocity = direction * speed; //idk what to put here just test it yourself
 
         //if we move in x direction, change only the x direction (don't change y)
-        if(Mathf.Abs(xInput) > 0){
+        if(Mathf.Abs(xInput) > 0){ //i think this adds a bit of "speeding up before full speed" too
             rb.linearVelocity = new Vector2(xInput * speed, rb.linearVelocity.y);
             float facing = Mathf.Sign(xInput);
             transform.localScale = new Vector3(facing, 1, 1);
@@ -52,8 +52,8 @@ public class PlayerMovement : MonoBehaviour
             rb.linearVelocity = new Vector2(xInput, rb.linearVelocity.y);
         }
 
-        if(grounded){
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, yInput * jumpPower);
+        if(Input.GetKey(KeyCode.Space) && grounded){
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
         }
 
     }
