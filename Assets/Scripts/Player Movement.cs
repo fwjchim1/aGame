@@ -1,11 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using NUnit.Framework.Constraints;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    
+    [SerializeField] private SpriteRenderer player;
     [Header("Movement Variables")]
     [SerializeField] private float speed = 5.0f;
     [SerializeField] private float jumpPower = 5.0f;
@@ -15,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     public BoxCollider2D groundCheck; //will use to check if on ground
     public LayerMask GroundMask; //the ground itself we will use for detection
-
+    public List<Sprite> animations;
 
     public bool grounded;
     float xInput;
