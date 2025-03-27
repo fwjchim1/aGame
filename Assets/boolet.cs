@@ -11,26 +11,37 @@ public class boolet : MonoBehaviour
     void Start()
     {
         
-        if(Input.GetKey(KeyCode.A)){ //shooting left when holding A (notice the transform.right*-1)
-            rb = GetComponent<Rigidbody2D>();
-            rb.linearVelocity = transform.right*-1 * speed; //speed of bullet on X axis (right as horiznotal. This will make a straight line)
-            transform.parent = null;
-        }else if(Input.GetKey(KeyCode.D)){ //shooting right when holding D
-            rb = GetComponent<Rigidbody2D>();
-            rb.linearVelocity = transform.right * speed; //speed of bullet on X axis (right as horiznotal. This will make a straight line)
-            transform.parent = null;
-        }else{ //shooting upward by default
-            rb = GetComponent<Rigidbody2D>();
-            rb.linearVelocity = transform.up * speed; //speed of bullet on X axis (right as horiznotal. This will make a straight line)
-            transform.parent = null;
-        }
+        // if(Input.GetKey(KeyCode.A)){ //shooting left when holding A (notice the transform.right*-1)
+        //     rb = GetComponent<Rigidbody2D>();
+        //     rb.linearVelocity = transform.right*-1 * speed; //speed of bullet on X axis (right as horiznotal. This will make a straight line)
+        //     transform.parent = null;
+        // }else if(Input.GetKey(KeyCode.D)){ //shooting right when holding D
+        //     rb = GetComponent<Rigidbody2D>();
+        //     rb.linearVelocity = transform.right * speed; //speed of bullet on X axis (right as horiznotal. This will make a straight line)
+        //     transform.parent = null;
+        // }else{ //shooting upward by default
+        //     rb = GetComponent<Rigidbody2D>();
+        //     rb.linearVelocity = transform.up * speed; //speed of bullet on X axis (right as horiznotal. This will make a straight line)
+        //     transform.parent = null;
+        // }
 
         
         //((((KEEPING THIS HERE SO I CAN LATER IMPLEMENT AIM VIA MOUSE PLACEMENT))))
-        //Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition); //convert screen mouse position to game mouse position
-        //rb.linearVelocity = mousePosition * speed; //speed of bullet on X axis (right as horiznotal. This will make a straight line)
-        //transform.parent gets the parent of the object
-        //transform.parent = null; //using transform.parent and setting it to null, we make the bullet belong to no parent (originally belonged to player which was the original parent)
+        rb = GetComponent<Rigidbody2D>();
+
+        // Get mouse position in world coordinates
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition.z = 0f; // Ensure the z-coordinate is correct
+
+        // Calculate direction from bullet to mouse
+        Vector2 direction = (mousePosition - transform.position).normalized;
+
+        // Apply velocity in the direction of the mouse
+        rb.linearVelocity = direction * speed;
+
+        // Detach bullet from any parent so it moves freely
+        transform.parent = null;
+        transform.localScale = new Vector3(0.5081f, 0.5081f, 0.5081f);
     }
 
     // Update is called once per frame
