@@ -49,4 +49,19 @@ public class boolet : MonoBehaviour
     {
         
     }
+
+
+    //if it collides with anything containing a collider, destroy the bullet
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Destroy(gameObject);
+    }
+
+
+    //when no longer within the camera, destroy the bullet
+    private void OnBecameInvisible(){
+        Destroy(gameObject);
+    }
+
+
 }
