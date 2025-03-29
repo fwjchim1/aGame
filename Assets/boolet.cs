@@ -59,6 +59,9 @@ public class boolet : MonoBehaviour
 
 
     //when no longer within the camera, destroy the bullet
+    //If we make a large rectangle with nothing inside it and surround it around the camera, we could make it so that whenever the bullets hit it, it gets destroyed
+    //there would be issues though like how you would detect it. Circle cast (raycast but circle) around the bullet might work in order to detect the large rectangle.
+    //make sure to create layers for bulletDestruction layer or something like that and set the rectangle to it
     private void OnBecameInvisible(){
         Destroy(gameObject);
     }
