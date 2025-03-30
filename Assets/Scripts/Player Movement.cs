@@ -10,6 +10,8 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement Variables")]
     [SerializeField] private float speed = 5.0f;
     [SerializeField] private float jumpPower = 5.0f;
+    public bool sprinting = false;
+    public bool walking = false;
     [Range(0,1)] //gives us a slider that lets us choose the friction
     [SerializeField] private float GroundDrag = 0.9f;
     private float horizontal; //will be either -1(left), 0(not moving), or 1(right)
@@ -36,6 +38,28 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if(Input.GetKeyDown(KeyCode.LeftControl)){
+            walking = false;
+            if(sprinting == false){
+                speed = 8.75f;
+                sprinting = true;
+            }else{
+                speed = 5.0f;
+                sprinting = false;
+            }
+        }
+
+        if(Input.GetKeyDown(KeyCode.LeftShift)){
+            sprinting = false;
+            if(walking == false){
+                speed = 2f;
+                walking = true;
+            }else{
+                speed = 5f;
+                walking = false;
+            }
+        }
+
         //tells us we want the current value of the input axis "horizontal"
         //Input.GetAxis(H/V) lets us get controls like WASD for movement
         xInput = Input.GetAxis("Horizontal");
@@ -56,6 +80,7 @@ public class PlayerMovement : MonoBehaviour
         if(Input.GetKey(KeyCode.Space) && grounded){
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
         }
+
 
     }
 

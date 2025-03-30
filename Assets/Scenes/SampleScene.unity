@@ -844,7 +844,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 3
   m_Material: {fileID: 6200000, guid: f5a4aa15a1b3dde4fb292ec86361d96f, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
@@ -943,16 +943,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   speed: 5
-  jumpPower: 10
+  jumpPower: 13
+  sprinting: 0
+  walking: 0
   GroundDrag: 0.9
   groundCheck: {fileID: 1564555173}
   GroundMask:
     serializedVersion: 2
     m_Bits: 64
-  animation:
-  - {fileID: 562819132858181619, guid: 8ec06a70e3541934180019610cbb9f3d, type: 3}
-  - {fileID: 2827249463828758459, guid: 702ba3c0b097e944c8be9042e3483ad5, type: 3}
-  - {fileID: 2386614363162036742, guid: eb38de79e710929488c1d046c575ecc5, type: 3}
+  animations: []
   grounded: 0
 --- !u!58 &663767028
 CircleCollider2D:
@@ -1143,19 +1142,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1253543738045338391, guid: cd7489ee7074e9d41bf6ce3af5b7d6f4, type: 3}
       propertyPath: m_LocalScale.x
-      value: 9.153786
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1253543738045338391, guid: cd7489ee7074e9d41bf6ce3af5b7d6f4, type: 3}
       propertyPath: m_LocalScale.y
-      value: -1.2414
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1253543738045338391, guid: cd7489ee7074e9d41bf6ce3af5b7d6f4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.59
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1253543738045338391, guid: cd7489ee7074e9d41bf6ce3af5b7d6f4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.9
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 1253543738045338391, guid: cd7489ee7074e9d41bf6ce3af5b7d6f4, type: 3}
       propertyPath: m_LocalPosition.z
