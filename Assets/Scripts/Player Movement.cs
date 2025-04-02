@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private SpriteRenderer player;
+    private SpriteRenderer player;
     [Header("Movement Variables")]
     [SerializeField] private float speed = 5.0f;
     [SerializeField] private float jumpPower = 5.0f;
@@ -29,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        player = GetComponent<SpriteRenderer>();
     }
 
     private void Start()
@@ -73,9 +74,12 @@ public class PlayerMovement : MonoBehaviour
             rb.linearVelocity = new Vector2(xInput * speed, rb.linearVelocity.y);
             float facing = Mathf.Sign(xInput);
             transform.localScale = new Vector3(facing, 1, 1);
+            runningAnimation();
         }else{
             rb.linearVelocity = new Vector2(xInput, rb.linearVelocity.y);
         }
+        
+        
 
         if(Input.GetKey(KeyCode.Space) && grounded){
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
@@ -105,6 +109,19 @@ public class PlayerMovement : MonoBehaviour
         //the .length > 0 means if there's something inside the array of colliders.
         //If there is something inside, they are likely grounded and will be marked as so.
         grounded = Physics2D.OverlapAreaAll(groundCheck.bounds.min, groundCheck.bounds.max, GroundMask).Length > 0;
+    }
+
+    private void runningAnimation(){
+
+
+        //changes the sprite to subaru running right (we don't really need the running left animation)
+        //since the player object itself turns 180 degrees, the subaru running right will turn into subaru running left
+        //this eliminates the need for subaru turning left
+        if(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A)){ //put || Input.GetKey(KeyCode.A) so we can actually turn left without it defaulting to idle aniamtion
+            player.sprite = animations[2];
+        }else{
+            player.sprite = animations[0]; //if not holding down anything, reset running animation to idle animation
+        }
     }
 
 }
