@@ -70,13 +70,13 @@ public class PlayerMovement : MonoBehaviour
         //rb.linearVelocity = direction * speed; //idk what to put here just test it yourself
 
         //if we move in x direction, change only the x direction (don't change y)
-        if(Mathf.Abs(xInput) > 0){ //i think this adds a bit of "speeding up before full speed" too
-            rb.linearVelocity = new Vector2(xInput * speed, rb.linearVelocity.y);
-            float facing = Mathf.Sign(xInput);
-            transform.localScale = new Vector3(facing, 1, 1);
-            runningAnimation();
+        if(Mathf.Abs(xInput) > 0){
+            rb.linearVelocity = new Vector2(xInput * speed, rb.linearVelocity.y); //sets horizontal speed to xInput*speed without changing vert speed
+            float facing = Mathf.Sign(xInput); //returns 1 ( if facing right) or -1 (if facing left)
+            transform.localScale = new Vector3(facing, 1, 1); //flips character by which way it's facing
+            runningAnimation(); //run
         }else{
-            rb.linearVelocity = new Vector2(xInput, rb.linearVelocity.y);
+            rb.linearVelocity = new Vector2(xInput, rb.linearVelocity.y); //if not running, set speed to to 0 (because not returning 1 or -1)
         }
         
         
