@@ -3,11 +3,15 @@ using UnityEngine;
 public class boolet : MonoBehaviour
 {
 
+    public int bulletDamage = 5;
     private Rigidbody2D rb;
     public float speed;
     [SerializeField] private int isRight = 0; //-1 is facing left, 0 is facing straight, 1 is facing right
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public int getBulletDamage(){
+        return bulletDamage;
+    }
+
     void Start()
     {
         
@@ -54,6 +58,8 @@ public class boolet : MonoBehaviour
     //if it collides with anything containing a collider, destroy the bullet
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        
+
         Destroy(gameObject);
     }
 
