@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class EnemyStats : MonoBehaviour
 {
-    [SerializeField] private int hp = 100;
+    [SerializeField] private int hp = 10;
 
     void Start()
     {
