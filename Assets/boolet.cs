@@ -58,7 +58,7 @@ public class boolet : MonoBehaviour
     //if it collides with anything containing a collider, destroy the bullet
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("Barrier")){
+        if(collision.gameObject.CompareTag("Barrier")){ //destroy when in contect with barrier
             Destroy(gameObject);
         }
 
