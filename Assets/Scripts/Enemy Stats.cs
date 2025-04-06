@@ -4,6 +4,7 @@ using UnityEngine;
 public class EnemyStats : MonoBehaviour
 {
     [SerializeField] private int hp = 10;
+    public int scoreAmount;
 
     void Start()
     {
@@ -14,7 +15,10 @@ public class EnemyStats : MonoBehaviour
     void Update()
     {
         if(hp <= 0){
+            PlayerStats playerStats = GetComponent<PlayerStats>();
             Destroy(gameObject);
+            playerStats.addScore(scoreAmount); //adds however much scored into score stat in player script
+            playerStats.addEnemiesDefeated(); //adds +1 to enemies defeated in player script
         }
     }
 
