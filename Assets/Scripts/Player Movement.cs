@@ -39,27 +39,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.LeftControl)){
-            walking = false;
-            if(sprinting == false){
-                speed = 8.75f;
-                sprinting = true;
-            }else{
-                speed = 5.0f;
-                sprinting = false;
-            }
-        }
 
-        if(Input.GetKeyDown(KeyCode.LeftShift)){
-            sprinting = false;
-            if(walking == false){
-                speed = 2f;
-                walking = true;
-            }else{
-                speed = 5f;
-                walking = false;
-            }
-        }
+        walkingOrSprinting(); //lets us walk or sprint
 
         //tells us we want the current value of the input axis "horizontal"
         //Input.GetAxis(H/V) lets us get controls like WASD for movement
@@ -76,7 +57,7 @@ public class PlayerMovement : MonoBehaviour
             transform.localScale = new Vector3(facing, 1, 1); //flips character by which way it's facing
             runningAnimation(); //run
         }else{
-            rb.linearVelocity = new Vector2(xInput, rb.linearVelocity.y); //if not running, set speed to to 0 (because not returning 1 or -1)
+            rb.linearVelocity = new Vector2(xInput, rb.linearVelocity.y); //if not running, sets speed to to 0 (because not returning 1 or -1)
         }
         
         
@@ -123,5 +104,30 @@ public class PlayerMovement : MonoBehaviour
             player.sprite = animations[0]; //if not holding down anything, reset running animation to idle animation
         }
     }
+
+    private void walkingOrSprinting(){
+        if(Input.GetKeyDown(KeyCode.LeftControl)){
+        walking = false;
+        if(sprinting == false){
+            speed = 8.75f;
+            sprinting = true;
+        }else{
+            speed = 5.0f;
+            sprinting = false;
+        }
+     }
+
+        if(Input.GetKeyDown(KeyCode.LeftShift)){
+            sprinting = false;
+            if(walking == false){
+                speed = 2f;
+                walking = true;
+            }else{
+                speed = 5f;
+                walking = false;
+            }
+        }
+    }
+
 
 }

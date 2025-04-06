@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class boolet : MonoBehaviour
@@ -58,9 +59,10 @@ public class boolet : MonoBehaviour
     //if it collides with anything containing a collider, destroy the bullet
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("Barrier")){ //destroy when in contect with barrier
+        if(!collision.gameObject.CompareTag("Enemy")){ //destroy when in contect with barrier
             Destroy(gameObject);
         }
+
 
         //Destroy(gameObject);
     }

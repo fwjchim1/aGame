@@ -1386,7 +1386,7 @@ GameObject:
   - component: {fileID: 663767027}
   m_Layer: 7
   m_Name: suba player (1)_0
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1553,7 +1553,7 @@ MonoBehaviour:
   jumpPower: 13
   sprinting: 0
   walking: 0
-  GroundDrag: 0.9
+  GroundDrag: 0.891
   groundCheck: {fileID: 1564555173}
   GroundMask:
     serializedVersion: 2
@@ -1955,7 +1955,7 @@ GameObject:
   m_Layer: 7
   m_Name: ground check
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
