@@ -197,6 +197,10 @@ PrefabInstance:
       value: kanaenemy_0 (1)
       objectReference: {fileID: 0}
     - target: {fileID: 502107084625934148, guid: 83dd4361bcfaa1542b6c34bafafe3507, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 502107084625934148, guid: 83dd4361bcfaa1542b6c34bafafe3507, type: 3}
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
@@ -251,6 +255,10 @@ PrefabInstance:
     - target: {fileID: 2750277337169079626, guid: 83dd4361bcfaa1542b6c34bafafe3507, type: 3}
       propertyPath: m_Constraints
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6817340210984634153, guid: 83dd4361bcfaa1542b6c34bafafe3507, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -663,6 +671,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1355726261508505860, guid: 83dd4361bcfaa1542b6c34bafafe3507, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6817340210984634153, guid: 83dd4361bcfaa1542b6c34bafafe3507, type: 3}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
