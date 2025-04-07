@@ -5,6 +5,7 @@ public class EnemyStats : MonoBehaviour
 {
     [SerializeField] private int hp = 10;
     public int scoreAmount;
+    public GameObject playerObject; //will assign the player into this gameObject so we can get the playerStats script and its values inside it
 
     void Start()
     {
@@ -15,7 +16,7 @@ public class EnemyStats : MonoBehaviour
     void Update()
     {
         if(hp <= 0){
-            PlayerStats playerStats = GetComponent<PlayerStats>();
+            PlayerStats playerStats = playerObject.GetComponent<PlayerStats>(); //getting the PlayerStats script from the player that's assigned to the playerObject variable
             Destroy(gameObject);
             playerStats.addScore(scoreAmount); //adds however much scored into score stat in player script
             playerStats.addEnemiesDefeated(); //adds +1 to enemies defeated in player script

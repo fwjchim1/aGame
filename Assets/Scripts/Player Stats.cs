@@ -4,11 +4,12 @@ using UnityEngine.UIElements;
 public class PlayerStats : MonoBehaviour
 {
 
-    [SerializeField] private int playerHP;
+    [SerializeField] private static int playerHP;
     [SerializeField] private bool alive = true;
-    [SerializeField] private int score;
-    [SerializeField] private int SubarusCollected = 100;
-    [SerializeField] private int EnemiesDefeated = 0;
+    [SerializeField] private static int score = 0;
+    [SerializeField] private static int SubarusCollected = 100;
+    [SerializeField] private static int EnemiesDefeated = 0;
+    public Vector2 spawnPoint;
     public GameOverScreen gameOver;
     private Rigidbody2D rb; //do we even neend this?
 
@@ -29,8 +30,8 @@ public class PlayerStats : MonoBehaviour
         SubarusCollected = 0;
     }
 
-    public void addSubarusCollected(int SubarusCollected){
-        this.SubarusCollected += SubarusCollected;
+    public void addSubarusCollected(int subarus){
+        SubarusCollected += subarus;
     }
 
     public int getEnemiesDefeated(){
@@ -41,24 +42,30 @@ public class PlayerStats : MonoBehaviour
     }
 
     public void addEnemiesDefeated(){
-        EnemiesDefeated++;
+        EnemiesDefeated += 1;
     }
+
+    public void returnToSpawnPoint(){
+        spawnPoint = new Vector2(0,3);
+        transform.position = spawnPoint;
+    }
+
 
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(!alive){
+        if(!alive){ //if you are dead and click the button remove the Game Over screen and run whatever is in the HideGameOver method in GameOverScreen script
             GameOverScreen gameOver = GetComponent<GameOverScreen>();
             gameOver.HideGameOver();
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision){
+    private void OnCollisionEnter2D(Collision2D collision){ //if you touch an enemy you die and trigger the Game Over Screen
         if(collision.gameObject.CompareTag("Enemy")){
             alive = false;
             gameOver.Setup(EnemiesDefeated, SubarusCollected, score);
