@@ -8,6 +8,8 @@ TagManager:
   - Bullet
   - Undefined
   - Barrier
+  - Enemy Movement Boundary A
+  - Enemy Movement Boundary B
   layers:
   - Default
   - TransparentFX

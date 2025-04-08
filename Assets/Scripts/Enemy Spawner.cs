@@ -9,10 +9,11 @@ public class EnemySpawner : MonoBehaviour
 
     public void Start()
     {
-        Instantiate(enemy);
+        
     }
 
     public void SpawnEnemies(){
         Instantiate(enemy);
+        Debug.Log("Spawned an enemy");
     }
 }

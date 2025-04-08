@@ -132,8 +132,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerSprite: {fileID: 911205816577477154}
   playerRB: {fileID: 0}
-  pointA: {fileID: 0}
-  pointB: {fileID: 0}
+  pointA: {fileID: 602944519536908405, guid: acad9761c378c4a4fa8e399f35f506f9, type: 3}
+  pointB: {fileID: 7240112633384500004, guid: 14dc2bdb2b848ca47b3df31144122088, type: 3}
   speed: 5
 --- !u!58 &4015064012215362389
 CircleCollider2D:
@@ -185,4 +185,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 10
   scoreAmount: 50
-  playerObject: {fileID: 0}
+  playerObject: {fileID: 6469922284444963141, guid: 11ba4a443a454fd48a4be485262f6b27, type: 3}
