@@ -9,7 +9,8 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private static int score = 0;
     [SerializeField] private static int SubarusCollected = 100;
     [SerializeField] private static int EnemiesDefeated = 0;
-    public Vector2 spawnPoint;
+    private Vector3 spawnPointVector3D;
+    public GameObject spawnPoint;
     public GameObject gameOver;
     private Rigidbody2D rb; //do we even neend this?
 
@@ -46,8 +47,8 @@ public class PlayerStats : MonoBehaviour
     }
 
     public void returnToSpawnPoint(){
-        spawnPoint = new Vector2(0,3);
-        transform.position = spawnPoint;
+        spawnPointVector3D = spawnPoint.transform.position;
+        transform.position = spawnPointVector3D;
     }
 
     public void isAlive(bool T_or_F){
@@ -57,7 +58,7 @@ public class PlayerStats : MonoBehaviour
 
     void Start()
     {
-
+        returnToSpawnPoint();
     }
 
     // Update is called once per frame
