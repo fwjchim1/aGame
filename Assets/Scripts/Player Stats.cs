@@ -10,7 +10,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private static int SubarusCollected = 100;
     [SerializeField] private static int EnemiesDefeated = 0;
     public Vector2 spawnPoint;
-    public GameOverScreen gameOver;
+    public GameObject gameOver;
     private Rigidbody2D rb; //do we even neend this?
 
     public int getScore(){
@@ -50,6 +50,10 @@ public class PlayerStats : MonoBehaviour
         transform.position = spawnPoint;
     }
 
+    public void isAlive(bool T_or_F){
+        alive = T_or_F;
+    }
+
 
     void Start()
     {
@@ -59,16 +63,14 @@ public class PlayerStats : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!alive){ //if you are dead and click the button remove the Game Over screen and run whatever is in the HideGameOver method in GameOverScreen script
-            GameOverScreen gameOver = GetComponent<GameOverScreen>();
-            gameOver.HideGameOver();
-        }
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision){ //if you touch an enemy you die and trigger the Game Over Screen
-        if(collision.gameObject.CompareTag("Enemy")){
+        if(collision.gameObject.CompareTag("Enemy") && alive){
             alive = false;
-            gameOver.Setup(EnemiesDefeated, SubarusCollected, score);
+            GameOverScreen GameOver = gameOver.GetComponent<GameOverScreen>();
+            GameOver.Setup(EnemiesDefeated, SubarusCollected, score);
         }
     }
 

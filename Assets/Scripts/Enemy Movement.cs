@@ -51,15 +51,15 @@ public class NewMonoBehaviourScript : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.CompareTag("Enemy Movement Boundary B")){
-            Debug.Log("Running trigger event");
+            //Debug.Log("Running trigger event");
             if(currentPoint == pointB.transform){
-                Debug.Log("Turned currentPoint to pointA");    
+                //Debug.Log("Turned currentPoint to pointA");    
                 currentPoint = pointA.transform; //when the distance between the enemy and the boundnary is less than 0.2, change currentPoint to pointA
             }
         }
         if(collision.gameObject.CompareTag("Enemy Movement Boundary A")){
             if(currentPoint == pointA.transform){
-                Debug.Log("Turned currentPoint to pointB");
+                //Debug.Log("Turned currentPoint to pointB");
                 currentPoint = pointB.transform; //when the distance between the enemy and the boundnary is less than 0.2, change currentPoint to pointB
             }
         
