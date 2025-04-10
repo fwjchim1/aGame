@@ -63,7 +63,6 @@ public class GameOverScreen : MonoBehaviour
         //respawn the enemies
         //finds each game object tagged with "Enemy Spawner"
         //the game objects with "Enemy Spawner" will spawn on only one enemy spawner if we don't iterate through them all
-        //
         foreach(GameObject go in arrayOfAllEnemySpawners){
             EnemySpawner respawnEnemies = go.GetComponent<EnemySpawner>();
             respawnEnemies.SpawnEnemies();

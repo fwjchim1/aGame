@@ -39,7 +39,7 @@ public class boolet : MonoBehaviour
         mousePosition.z = 0f; // Ensure the z-coordinate is correct
 
         // Calculate direction from bullet to mouse
-        Vector2 direction = (mousePosition - transform.position).normalized; //use normalize to scale down length to 1. Use normalized to bring range to 1 (so the speed isn't influenced by the player's position)
+        Vector2 direction = ((Vector2) (mousePosition - transform.position)).normalized; //use normalize to scale down length to 1. Use normalized to bring range to 1 (so the speed isn't influenced by the player's position)
 
         // Apply velocity in the direction of the mouse
         rb.linearVelocity = direction * speed;
