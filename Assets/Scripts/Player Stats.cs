@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -13,6 +14,10 @@ public class PlayerStats : MonoBehaviour
     public GameObject spawnPoint;
     public GameObject gameOver;
     private Rigidbody2D rb; //do we even neend this?
+
+    [Header("Audio Stuff")]
+    public List<AudioClip> playerAudioClips;
+    public AudioSource playerAudioSource;
 
     public int getScore(){
         return score;
@@ -69,6 +74,7 @@ public class PlayerStats : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision){ //if you touch an enemy you die and trigger the Game Over Screen
         if(collision.gameObject.CompareTag("Enemy") && alive){
+            playerAudioSource.PlayOneShot(playerAudioClips[0]);
             alive = false;
             GameOverScreen GameOver = gameOver.GetComponent<GameOverScreen>();
             GameOver.Setup(EnemiesDefeated, SubarusCollected, score);

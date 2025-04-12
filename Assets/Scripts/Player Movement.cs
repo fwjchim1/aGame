@@ -25,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
     float yInput;
 
     //returns whether or not we are grounded
-    public bool playerIsGrounded(){
+    public bool IsGrounded(){
         return grounded;
     }
 
@@ -67,7 +67,7 @@ public class PlayerMovement : MonoBehaviour
         
         
 
-        if(Input.GetKey(KeyCode.Space) && grounded){
+        if(Input.GetKeyDown(KeyCode.Space) && grounded){
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
         }
 

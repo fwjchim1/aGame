@@ -57,6 +57,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
                 currentPoint = pointA.transform; //when the distance between the enemy and the boundnary is less than 0.2, change currentPoint to pointA
             }
         }
+        
         if(collision.gameObject.CompareTag("Enemy Movement Boundary A")){
             if(currentPoint == pointA.transform){
                 //Debug.Log("Turned currentPoint to pointB");
