@@ -24,6 +24,11 @@ public class PlayerMovement : MonoBehaviour
     float xInput;
     float yInput;
 
+    //returns whether or not we are grounded
+    public bool playerIsGrounded(){
+        return grounded;
+    }
+
     
 
     private void Awake()

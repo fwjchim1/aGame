@@ -39,6 +39,9 @@ public class boolet : MonoBehaviour
         mousePosition.z = 0f; // Ensure the z-coordinate is correct
 
         // Calculate direction from bullet to mouse
+        //cast direction with (Vector2)
+        //Why? Because without it, (mousePosition - transform.position) would give us our x and y but not our z, and that can affect the velocity
+        //to prevent this, cast to Vector2 so we ONLY need x and y.
         Vector2 direction = ((Vector2) (mousePosition - transform.position)).normalized; //use normalize to scale down length to 1. Use normalized to bring range to 1 (so the speed isn't influenced by the player's position)
 
         // Apply velocity in the direction of the mouse
