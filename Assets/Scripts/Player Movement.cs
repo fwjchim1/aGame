@@ -66,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
         }
         
         
-
+        //jump
         if(Input.GetKeyDown(KeyCode.Space) && grounded){
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
         }

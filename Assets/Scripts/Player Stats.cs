@@ -8,7 +8,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private static int playerHP;
     [SerializeField] private bool alive = true;
     [SerializeField] private static int score = 0;
-    [SerializeField] private static int SubarusCollected = 100;
+    [SerializeField] private static int SubarusCollected = 0;
     [SerializeField] private static int EnemiesDefeated = 0;
     private Vector3 spawnPointVector3D;
     public GameObject spawnPoint;
@@ -79,6 +79,14 @@ public class PlayerStats : MonoBehaviour
             GameOverScreen GameOver = gameOver.GetComponent<GameOverScreen>();
             GameOver.Setup(EnemiesDefeated, SubarusCollected, score);
         }
+
+        if(collision.gameObject.CompareTag("Subaru Trophy")){
+            SubarusCollected++;
+            score += 25;
+            playerAudioSource.PlayOneShot(playerAudioClips[1]);
+            Destroy(collision.gameObject);
+        }
+
     }
 
 
