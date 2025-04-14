@@ -11,6 +11,7 @@ TagManager:
   - Enemy Movement Boundary A
   - Enemy Movement Boundary B
   - Enemy Spawner
+  - Subaru Trophy
   layers:
   - Default
   - TransparentFX
