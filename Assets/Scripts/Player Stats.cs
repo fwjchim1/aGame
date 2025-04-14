@@ -103,6 +103,7 @@ public class PlayerStats : MonoBehaviour
             alive = false;
             GameOverScreen GameOver = gameOver.GetComponent<GameOverScreen>();
             GameOver.Setup(EnemiesDefeated, SubarusCollected, score); //Game Over screen active
+            SubaruButtonText.text = "It was a valiant effort! Click on me to restart!";
         }
 
         if(collision.gameObject.CompareTag("Subaru Trophy")){
@@ -113,7 +114,15 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
-
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.CompareTag("Win Point")){
+            GameOverScreen GameOver = gameOver.GetComponent<GameOverScreen>();
+            GameOver.Setup(EnemiesDefeated, SubarusCollected, score);
+            WinOrLossText.text = "GAME WIN!";
+            SubaruButtonText.text = SubaruText[Random.Range(0, SubaruText.Count)];
+        }
+    }
 
 
 

@@ -15,7 +15,7 @@ public class SubaruTrophy : MonoBehaviour
     public Transform currentPoint;
 
     [Header("How many trophies")]
-    public GameObject[] TrophiesLeft = GameObject.FindGameObjectsWithTag("Subaru Trophy"); //give an array of all subaru trophies
+    public GameObject[] TrophiesLeft;
     public static int SubaruTrophyCount; //how many trophies are there
 
 
@@ -23,6 +23,7 @@ public class SubaruTrophy : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         currentPoint = pointA.transform;
+        TrophiesLeft = GameObject.FindGameObjectsWithTag("Subaru Trophy"); //give an array of all subaru trophies
         SubaruTrophyCount = TrophiesLeft.Count(); //get # of subaru trophies
     }
 
