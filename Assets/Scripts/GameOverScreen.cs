@@ -10,6 +10,7 @@ public class GameOverScreen : MonoBehaviour
     public TextMeshProUGUI SubarusCollected;
     public TextMeshProUGUI EnemiesDefeated;
     public TextMeshProUGUI Score;
+    public TextMeshProUGUI WinOrLossDecision;
 
     public Button restartButton; //it's in the button component of the button UI in the hierarchy (we get to choose which method it runs. in this case, HideGameOver)
     public GameObject playerObject; //will assign the player into this gameObject so we can get the playerStats script and its values inside it
@@ -20,6 +21,7 @@ public class GameOverScreen : MonoBehaviour
 
     public void Awake()
     {
+        //FindGameObjectsWithTag returns an array of all the objects with the tag
         arrayOfAllEnemySpawners = GameObject.FindGameObjectsWithTag("Enemy Spawner");
     }
 

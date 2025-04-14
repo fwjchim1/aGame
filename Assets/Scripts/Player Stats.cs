@@ -1,19 +1,43 @@
+using System;
 using System.Collections.Generic;
+using TMPro;
+using Unity.Mathematics;
 using UnityEngine;
+using Random = UnityEngine.Random; //Random = UnityEngine.Random so we can specify that when we use Random we want to use the Random from UnityEngine.Random and not Unity.Mathematics
+using UnityEngine.UI;
 using UnityEngine.UIElements;
+using Unity.VisualScripting;
 
 public class PlayerStats : MonoBehaviour
 {
 
+    [Header("Actual stats")]
     [SerializeField] private static int playerHP;
     [SerializeField] private bool alive = true;
     [SerializeField] private static int score = 0;
     [SerializeField] private static int SubarusCollected = 0;
     [SerializeField] private static int EnemiesDefeated = 0;
+
+    [Header("Game win/loss text")]
+    public TextMeshProUGUI WinOrLossText;
+    public TextMeshProUGUI SubaruButtonText;
+    public List<string> SubaruText = new List<string>(){
+                                      "You did it! (Click me)",
+                                      "Took you long enough. Just kidding! Good Work! (Click me)",
+                                      "There you are! I was starting to think you wouldn't make it. (Click me)",
+                                      "A familiar face... I'm glad you're here. (Click me)",
+                                      "Did you miss me? (Click me)",
+                                      "You're back! (Click me)"};
+    
+
+
+
+
+    [Header("Misc")]
     private Vector3 spawnPointVector3D;
     public GameObject spawnPoint;
     public GameObject gameOver;
-    private Rigidbody2D rb; //do we even neend this?
+
 
     [Header("Audio Stuff")]
     public List<AudioClip> playerAudioClips;
@@ -65,6 +89,7 @@ public class PlayerStats : MonoBehaviour
     {
         returnToSpawnPoint();
     }
+    
 
     // Update is called once per frame
     void Update()
@@ -77,7 +102,7 @@ public class PlayerStats : MonoBehaviour
             playerAudioSource.PlayOneShot(playerAudioClips[0]);
             alive = false;
             GameOverScreen GameOver = gameOver.GetComponent<GameOverScreen>();
-            GameOver.Setup(EnemiesDefeated, SubarusCollected, score);
+            GameOver.Setup(EnemiesDefeated, SubarusCollected, score); //Game Over screen active
         }
 
         if(collision.gameObject.CompareTag("Subaru Trophy")){
@@ -86,8 +111,9 @@ public class PlayerStats : MonoBehaviour
             playerAudioSource.PlayOneShot(playerAudioClips[1]);
             Destroy(collision.gameObject);
         }
-
     }
+
+
 
 
 

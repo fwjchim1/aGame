@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -12,13 +14,16 @@ public class SubaruTrophy : MonoBehaviour
     public GameObject pointB;
     public Transform currentPoint;
 
+    [Header("How many trophies")]
+    public GameObject[] TrophiesLeft = GameObject.FindGameObjectsWithTag("Subaru Trophy"); //give an array of all subaru trophies
+    public static int SubaruTrophyCount; //how many trophies are there
 
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         currentPoint = pointA.transform;
+        SubaruTrophyCount = TrophiesLeft.Count(); //get # of subaru trophies
     }
 
     // Update is called once per frame
@@ -34,6 +39,7 @@ public class SubaruTrophy : MonoBehaviour
             Debug.Log("Going up");
         }
     }
+    
 
     void OnTriggerEnter2D(Collider2D collision){
         if(collision.gameObject.CompareTag("Subaru Trophy Point A")){
