@@ -112,6 +112,10 @@ public class PlayerStats : MonoBehaviour
             playerAudioSource.PlayOneShot(playerAudioClips[1]);
             Destroy(collision.gameObject);
         }
+        
+        if(collision.gameObject.CompareTag("Apple")){
+            Destroy(collision.gameObject);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collision)

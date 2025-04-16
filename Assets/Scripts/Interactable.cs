@@ -6,6 +6,7 @@ public class Interactable : MonoBehaviour
     public Collider2D playerCollider;
     public GameObject Item;
     public bool inInteractableArea = false;
+    public float objectSpawnDisplacement;
 
     void Start()
     {
@@ -34,8 +35,8 @@ public class Interactable : MonoBehaviour
     }
 
     public void Interact(){
-            Instantiate(Item, new Vector3 (transform.position.x, transform.position.y,0), Quaternion.identity);
-            Debug.Log("Instantiated an apple");
+        Instantiate(Item, new Vector3 (transform.position.x + objectSpawnDisplacement, transform.position.y), Quaternion.identity);
+        Debug.Log("Instantiated an apple");
     }
 
 
