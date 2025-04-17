@@ -17,6 +17,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private static int score = 0;
     [SerializeField] private static int SubarusCollected = 0;
     [SerializeField] private static int EnemiesDefeated = 0;
+    public int playerLives;
 
     [Header("Game win/loss text")]
     public TextMeshProUGUI WinOrLossText;
@@ -42,6 +43,13 @@ public class PlayerStats : MonoBehaviour
     [Header("Audio Stuff")]
     public List<AudioClip> playerAudioClips;
     public AudioSource playerAudioSource;
+
+    [Header("Scripts")]
+    public GameObject interactableScript;   
+
+    [Header("Stats UI")]
+    public TextMeshProUGUI Lives; 
+
 
     public int getScore(){
         return score;
@@ -94,7 +102,7 @@ public class PlayerStats : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
     private void OnCollisionEnter2D(Collision2D collision){ //if you touch an enemy you die and trigger the Game Over Screen
@@ -114,6 +122,9 @@ public class PlayerStats : MonoBehaviour
         }
         
         if(collision.gameObject.CompareTag("Apple")){
+            Interactable interactable = interactableScript.gameObject.GetComponent<Interactable>();
+            playerLives += interactable.giveLife;
+            Lives.text = $"Subaru Lives: " + playerLives;
             Destroy(collision.gameObject);
         }
     }

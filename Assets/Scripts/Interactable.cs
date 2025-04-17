@@ -7,6 +7,7 @@ public class Interactable : MonoBehaviour
     public GameObject Item;
     public bool inInteractableArea = false;
     public float objectSpawnDisplacement;
+    public int giveLife; //choose how much life you want to give
 
     void Start()
     {
