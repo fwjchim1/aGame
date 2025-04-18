@@ -1,3 +1,5 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Interactable : MonoBehaviour
@@ -9,6 +11,7 @@ public class Interactable : MonoBehaviour
     public float objectSpawnDisplacement;
     public int giveLife; //choose how much life you want to give
     public int interactCounter = 0;
+
 
     void Start()
     {
@@ -45,6 +48,32 @@ public class Interactable : MonoBehaviour
             Debug.Log("Subaru couldn't find anything else in the tree.");
         }
     }
+
+
+
+    //overloading variables that we might use for later interactions
+    public void Interact(string TrueText){
+        if(interactCounter < 1){
+            Instantiate(Item, new Vector3 (transform.position.x + objectSpawnDisplacement, transform.position.y), Quaternion.identity);
+            Debug.Log(TrueText);
+            interactCounter++;
+        }else{
+            Debug.Log("");
+        }
+    }
+
+    public void Interact(string TrueText, string FalseText){
+        if(interactCounter < 1){
+            Instantiate(Item, new Vector3 (transform.position.x + objectSpawnDisplacement, transform.position.y), Quaternion.identity);
+            Debug.Log(TrueText);
+            interactCounter++;
+        }else{
+            Debug.Log(FalseText);
+        }
+    }
+
+
+
 
 
 }

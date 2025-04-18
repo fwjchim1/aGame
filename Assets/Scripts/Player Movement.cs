@@ -29,7 +29,16 @@ public class PlayerMovement : MonoBehaviour
         return grounded;
     }
 
-    
+    public float getSpeed(){
+        return speed;
+    }
+
+    public void setSpeed(float speed){
+        this.speed = speed;
+    }
+
+
+
 
     private void Awake()
     {

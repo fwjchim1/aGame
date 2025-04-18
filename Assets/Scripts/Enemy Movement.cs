@@ -12,6 +12,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
     [SerializeField] private GameObject pointB;
     [SerializeField] private float speed;
     private Transform currentPoint; //the point in which we are moving toward (not the enemy's location)
+    public GameObject playerSpeed;
 
 
 

@@ -16,13 +16,14 @@ public class GameOverScreen : MonoBehaviour
     public GameObject playerObject; //will assign the player into this gameObject so we can get the playerStats script and its values inside it
     public GameObject enemies;
     public GameObject[] arrayOfAllEnemies;
-    public GameObject[] arrayOfAllEnemySpawners;
+    public GameObject[] arrayOfAllSubaruTrophies;
+    public GameObject[] arrayOfAllEntitySpawners;
 
 
     public void Awake()
     {
         //FindGameObjectsWithTag returns an array of all the objects with the tag
-        arrayOfAllEnemySpawners = GameObject.FindGameObjectsWithTag("Enemy Spawner");
+        arrayOfAllEntitySpawners = GameObject.FindGameObjectsWithTag("Enemy Spawner");
     }
 
 
@@ -39,6 +40,7 @@ public class GameOverScreen : MonoBehaviour
         this.EnemiesDefeated.text = $"Enemies Defeated: " + enemiesDefeated; //adds current enemies defeated to game over screen
         this.Score.text = $"Score: " + score; //adds current score to game over screen
         arrayOfAllEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+        arrayOfAllSubaruTrophies = GameObject.FindGameObjectsWithTag("Subaru Trophy");
         Debug.Log(arrayOfAllEnemies);
         Time.timeScale = 0f; //pause the game
     }
@@ -46,7 +48,7 @@ public class GameOverScreen : MonoBehaviour
 
     //hide game over screen
     public void HideGameOver(){
-        gameObject.SetActive(false);
+        gameObject.SetActive(false); //get rid of game over screen
     }
 
     //Remove all enemies, reset stats, and unfreeze game
@@ -62,21 +64,24 @@ public class GameOverScreen : MonoBehaviour
             Debug.Log("Destroyed an enemy");
         }
 
-        //respawn the enemies
+        foreach(GameObject go in arrayOfAllSubaruTrophies){ //goes through every enemy and destroys them
+            Destroy(go);
+            Debug.Log("Destroyed an enemy");
+        }
+
+        //respawn the entities
         //finds each game object tagged with "Enemy Spawner"
         //the game objects with "Enemy Spawner" will spawn on only one enemy spawner if we don't iterate through them all
-        foreach(GameObject go in arrayOfAllEnemySpawners){
-            EnemySpawner respawnEnemies = go.GetComponent<EnemySpawner>();
-            respawnEnemies.SpawnEnemies();
+        foreach(GameObject go in arrayOfAllEntitySpawners){
+            EntitySpawner respawnEntities = go.GetComponent<EntitySpawner>();
+            respawnEntities.SpawnEntities();
             Debug.Log("Spawned an enemy");
         }
 
 
         PlayerStats playerStats = playerObject.GetComponent<PlayerStats>(); //getting the PlayerStats script from the player that's assigned to the playerObject variable
         //DO NOT USE GetComponent<>() ALONE IF THE SCRIPT YOU'RE TRYING TO ACCESS ISN'T ALREADY IN THE MAIN GAMEEOBJECT!
-        playerStats.resetScore(); //reset total score
-        //playerStats.setSubarusCollected(100); (KEEP IT AT 100 FOR NOW BUT LATER WE WILL HAVE TO CREATE A RESET METHOD IN THE PLAYER STATS)
-        playerStats.resetEnemiesDefeated(); //resets enemy defeated score
+        playerStats.resetAllStats();
         playerStats.returnToSpawnPoint(); //tp the person back to the spawn point
         playerStats.isAlive(true);
 
@@ -87,8 +92,8 @@ public class GameOverScreen : MonoBehaviour
 
     //spawn the enemy from the Enemy Spawner script
     public void SpawnTheEnemy(){
-        EnemySpawner spawnEnemies = enemies.GetComponent<EnemySpawner>();
-        spawnEnemies.SpawnEnemies();
+        EntitySpawner spawnEnemies = enemies.GetComponent<EntitySpawner>();
+        spawnEnemies.SpawnEntities();
     }
 
 

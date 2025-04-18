@@ -17,7 +17,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private static int score = 0;
     [SerializeField] private static int SubarusCollected = 0;
     [SerializeField] private static int EnemiesDefeated = 0;
-    public static int playerLives;
+    public int playerLives = 1;
 
     [Header("Game win/loss text")]
     public TextMeshProUGUI WinOrLossText;
@@ -32,8 +32,6 @@ public class PlayerStats : MonoBehaviour
     
 
 
-
-
     [Header("Misc")]
     private Vector3 spawnPointVector3D;
     public GameObject spawnPoint;
@@ -45,13 +43,95 @@ public class PlayerStats : MonoBehaviour
     public AudioSource playerAudioSource;
 
     [Header("Scripts")]
-
+    public GameObject playerMovementObject;
+    public GameObject EntitySpawnerPrefab;
 
     [Header("Stats UI")]
     public TextMeshProUGUI Lives; 
 
 
-    public int getScore(){
+
+
+    public void resetAllStats(){
+        resetScore();
+        resetEnemiesDefeated();
+        resetSubarusCollected();
+        resetLives();
+    }
+
+    public void returnToSpawnPoint(){
+        spawnPointVector3D = spawnPoint.transform.position;                                        //get the transform of the spawn point object
+        PlayerMovement playerMovementScript = playerMovementObject.GetComponent<PlayerMovement>(); //get PlayerMovement script
+        float speedTemp = playerMovementScript.getSpeed();                                         //store original playerMovement speed from speed variable in PlayerMovement script
+        playerMovementScript.setSpeed(0);                                                          //set the PlayerMovement speed variable to 0
+        transform.position = spawnPointVector3D;                                                   //teleport the player to the transform of the spawn point object
+        playerMovementScript.setSpeed(speedTemp);                                                  //set the player's speed back to normal
+    }
+
+    public void isAlive(bool T_or_F){
+        alive = T_or_F;
+    }
+
+
+    void Start()
+    {
+        returnToSpawnPoint();
+    }
+    
+
+    // Update is called once per frame
+    void Update()
+    {
+        Lives.text = $"Subaru Lives: " + playerLives;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision){ //if you touch an enemy you die and trigger the Game Over Screen
+        GameOverScreen GameOver = gameOver.GetComponent<GameOverScreen>();
+        EntitySpawner EntitySpawner = EntitySpawnerPrefab.GetComponent<EntitySpawner>();
+        if(collision.gameObject.CompareTag("Enemy") && alive){
+            playerAudioSource.PlayOneShot(playerAudioClips[0]);
+            playerLives--;
+            if(playerLives == 0 || playerLives < 0){ //I think if i did playerLives <= 0 it'd still stop at 1 and we don't want it to stop at 1
+                alive = false;
+                GameOver.Setup(EnemiesDefeated, SubarusCollected, score); //Game Over screen active
+                SubaruButtonText.text = "It was a valiant effort! Click on me to restart!";
+            }else{
+                returnToSpawnPoint();
+            }
+        }
+
+        if(collision.gameObject.CompareTag("Subaru Trophy")){
+            SubarusCollected++;
+            score += 25;
+            playerAudioSource.PlayOneShot(playerAudioClips[1]);
+            Destroy(collision.gameObject);
+            EntitySpawner.SetIsOnScreen(false); //if it's no longer on screen we can instantiate the prefab again with the entity spawner.
+        }
+        
+        if(collision.gameObject.CompareTag("Apple")){
+            Interactable interactable = collision.gameObject.GetComponent<Interactable>(); //get the Interactable script from the object tagged with apple
+            playerLives += interactable.giveLife; //give x amount of player lives depending on the object with the interactable script and how much it offers
+            Destroy(collision.gameObject); //destroy the apple
+            EntitySpawner.SetIsOnScreen(false); //if it's no longer on screen we can instantiate the prefab again with the entity spawner..
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.CompareTag("Win Point")){
+            GameOverScreen GameOver = gameOver.GetComponent<GameOverScreen>();
+            GameOver.Setup(EnemiesDefeated, SubarusCollected, score);
+            WinOrLossText.text = "GAME WIN!";
+            SubaruButtonText.text = SubaruText[Random.Range(0, SubaruText.Count)];
+        }
+    }
+
+
+
+
+
+
+        public int getScore(){
         return score;
     }
     public void resetScore(){
@@ -83,64 +163,7 @@ public class PlayerStats : MonoBehaviour
         EnemiesDefeated += 1;
     }
 
-    public void returnToSpawnPoint(){
-        spawnPointVector3D = spawnPoint.transform.position;
-        transform.position = spawnPointVector3D;
+    public void resetLives(){
+        playerLives = 1;
     }
-
-    public void isAlive(bool T_or_F){
-        alive = T_or_F;
-    }
-
-
-    void Start()
-    {
-        returnToSpawnPoint();
-    }
-    
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision){ //if you touch an enemy you die and trigger the Game Over Screen
-        if(collision.gameObject.CompareTag("Enemy") && alive){
-            playerAudioSource.PlayOneShot(playerAudioClips[0]);
-            alive = false;
-            GameOverScreen GameOver = gameOver.GetComponent<GameOverScreen>();
-            GameOver.Setup(EnemiesDefeated, SubarusCollected, score); //Game Over screen active
-            SubaruButtonText.text = "It was a valiant effort! Click on me to restart!";
-        }
-
-        if(collision.gameObject.CompareTag("Subaru Trophy")){
-            SubarusCollected++;
-            score += 25;
-            playerAudioSource.PlayOneShot(playerAudioClips[1]);
-            Destroy(collision.gameObject);
-        }
-        
-        if(collision.gameObject.CompareTag("Apple")){
-            Interactable interactable = collision.gameObject.GetComponent<Interactable>();
-            playerLives += interactable.giveLife;
-            Lives.text = $"Subaru Lives: " + playerLives;
-            Destroy(collision.gameObject);
-        }
-    }
-
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.gameObject.CompareTag("Win Point")){
-            GameOverScreen GameOver = gameOver.GetComponent<GameOverScreen>();
-            GameOver.Setup(EnemiesDefeated, SubarusCollected, score);
-            WinOrLossText.text = "GAME WIN!";
-            SubaruButtonText.text = SubaruText[Random.Range(0, SubaruText.Count)];
-        }
-    }
-
-
-
-
-
 }

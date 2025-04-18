@@ -30,6 +30,7 @@ public class SubaruTrophy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //bounce up or down depending on if they hit A or B (if hit A, go down. If hit B, go up)
         if(currentPoint == pointA.transform){
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, -speed);
             Debug.Log("Going down");
@@ -41,7 +42,7 @@ public class SubaruTrophy : MonoBehaviour
         }
     }
     
-
+    //checks if they hit either points A or B
     void OnTriggerEnter2D(Collider2D collision){
         if(collision.gameObject.CompareTag("Subaru Trophy Point A")){
             currentPoint = pointA.transform;
