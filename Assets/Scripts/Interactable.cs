@@ -8,6 +8,7 @@ public class Interactable : MonoBehaviour
     public bool inInteractableArea = false;
     public float objectSpawnDisplacement;
     public int giveLife; //choose how much life you want to give
+    public int interactCounter = 0;
 
     void Start()
     {
@@ -36,8 +37,13 @@ public class Interactable : MonoBehaviour
     }
 
     public void Interact(){
-        Instantiate(Item, new Vector3 (transform.position.x + objectSpawnDisplacement, transform.position.y), Quaternion.identity);
-        Debug.Log("Instantiated an apple");
+        if(interactCounter < 1){
+            Instantiate(Item, new Vector3 (transform.position.x + objectSpawnDisplacement, transform.position.y), Quaternion.identity);
+            Debug.Log("Instantiated an apple");
+            interactCounter++;
+        }else{
+            Debug.Log("Subaru couldn't find anything else in the tree.");
+        }
     }
 
 

@@ -17,7 +17,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private static int score = 0;
     [SerializeField] private static int SubarusCollected = 0;
     [SerializeField] private static int EnemiesDefeated = 0;
-    public int playerLives;
+    public static int playerLives;
 
     [Header("Game win/loss text")]
     public TextMeshProUGUI WinOrLossText;
@@ -45,7 +45,7 @@ public class PlayerStats : MonoBehaviour
     public AudioSource playerAudioSource;
 
     [Header("Scripts")]
-    public GameObject interactableScript;   
+
 
     [Header("Stats UI")]
     public TextMeshProUGUI Lives; 
@@ -122,7 +122,7 @@ public class PlayerStats : MonoBehaviour
         }
         
         if(collision.gameObject.CompareTag("Apple")){
-            Interactable interactable = interactableScript.gameObject.GetComponent<Interactable>();
+            Interactable interactable = collision.gameObject.GetComponent<Interactable>();
             playerLives += interactable.giveLife;
             Lives.text = $"Subaru Lives: " + playerLives;
             Destroy(collision.gameObject);

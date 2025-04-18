@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 604212381374523646}
   - component: {fileID: 2687630609525282143}
   - component: {fileID: 2628238038969074619}
+  - component: {fileID: 7899304050025253197}
   m_Layer: 0
   m_Name: Apple
   m_TagString: Apple
@@ -162,3 +163,20 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.52, y: 1.56}
   m_EdgeRadius: 0
+--- !u!114 &7899304050025253197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4224924319766826195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fee2043144af6e147b86e67b0e3656c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCollider: {fileID: 0}
+  Item: {fileID: 0}
+  inInteractableArea: 0
+  objectSpawnDisplacement: 0
+  giveLife: 1
