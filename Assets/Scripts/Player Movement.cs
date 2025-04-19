@@ -21,8 +21,8 @@ public class PlayerMovement : MonoBehaviour
     public List<Sprite> animations;
 
     public bool grounded;
-    float xInput;
-    float yInput;
+    public float xInput;
+    public float yInput;
 
     //returns whether or not we are grounded
     public bool IsGrounded(){
@@ -58,8 +58,8 @@ public class PlayerMovement : MonoBehaviour
 
         //tells us we want the current value of the input axis "horizontal"
         //Input.GetAxis(H/V) lets us get controls like WASD for movement
-        xInput = Input.GetAxis("Horizontal");
-        yInput = Input.GetAxis("Vertical");
+        xInput = Input.GetAxisRaw("Horizontal"); //Input.GetAxis returns a float value between -1.0 and 1.0 but if you use Input.GetAxisRaw it returns EITHER -1 or 1.0
+        yInput = Input.GetAxisRaw("Vertical");
         
         Vector2 direction = new Vector2(xInput, yInput).normalized; //normalizing makes it so that going diagonal doesn't make it go any faster than horizontally
         //rb.linearVelocity = direction * speed; //idk what to put here just test it yourself
@@ -71,6 +71,7 @@ public class PlayerMovement : MonoBehaviour
             transform.localScale = new Vector3(facing, 1, 1); //flips character by which way it's facing
             runningAnimation(); //run
         }else{
+            runningAnimation(); //we needa put this here so it knows to set the idle animation for when you're not moving
             rb.linearVelocity = new Vector2(xInput, rb.linearVelocity.y); //if not running, sets speed to to 0 (because not returning 1 or -1)
         }
         
